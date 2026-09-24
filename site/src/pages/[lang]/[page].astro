@@ -1,0 +1,141 @@
+---
+import Base from "../../layouts/Base.astro";
+import Downloads from "../../components/Downloads.astro";
+import { T, BUNDLES, LANGS, STATIC_PAGES, TOPICS, type Lang } from "../../lib/i18n";
+import { pagesFor, urlOf, staticUrl } from "../../lib/pages";
+
+type Key = keyof typeof STATIC_PAGES;
+export function getStaticPaths() {
+  return LANGS.flatMap((lang) =>
+    (Object.keys(STATIC_PAGES) as Key[]).map((key) => ({ params: { lang, page: STATIC_PAGES[key][lang] }, props: { key } })),
+  );
+}
+const lang = Astro.params.lang as Lang;
+const { key } = Astro.props as { key: Key };
+const t = T[lang];
+const other: Lang = lang === "en" ? "fr" : "en";
+
+const titles: Record<Key, Record<Lang, string>> = {
+  downloads: { en: "Downloads", fr: "Téléchargements" },
+  sources: { en: "Sources", fr: "Sources" },
+  about: { en: "About this library", fr: "À propos de cette bibliothèque" },
+  search: { en: "Search", fr: "Recherche" },
+};
+const descs: Record<Key, Record<Lang, string>> = {
+  downloads: { en: "Every section as a printable handout (PDF), an editable document (DOCX) and a slide deck (PowerPoint), in English and French.", fr: "Chaque section en document à imprimer (PDF), en document modifiable (DOCX) et en présentation (PowerPoint), en français et en anglais." },
+  sources: { en: "Every guideline, study and organisation this library draws on.", fr: "Toutes les lignes directrices, études et organisations sur lesquelles s'appuie cette bibliothèque." },
+  about: { en: "Who made this, how it is written, and what it is not.", fr: "Qui l'a créée, comment elle est rédigée, et ce qu'elle n'est pas." },
+  search: { en: "Search every page in the library.", fr: "Rechercher dans toutes les pages de la bibliothèque." },
+};
+
+// Sources page: every source named on any page in this language, with the pages that cite it.
+const pages = await pagesFor(lang);
+const bySource = new Map<string, { title: string; url: string }[]>();
+for (const p of pages) for (const s of p.data.sources) {
+  if (!bySource.has(s)) bySource.set(s, []);
+  bySource.get(s)!.push({ title: p.data.title, url: urlOf(p) });
+}
+const sources = [...bySource.entries()].sort((a, b) => a[0].localeCompare(b[0], lang));
+
+const rules = {
+  en: [
+    "Risk language, never certainty: “lowers the risk of”, never “will cause”.",
+    "No fear-based messaging and no graphic imagery.",
+    "Never “control”, “compliant” or “good/bad blood sugar”: we say “manage”, “in or outside target range”, and give the actual numbers.",
+    "Every historical rate is paired with its trend: most published complication figures come from people diagnosed decades ago.",
+    "Where expert bodies disagree, we say so and name both positions.",
+    "Where a recommendation rests on weak evidence, we say that too.",
+    "Complications are never a verdict on effort.",
+  ],
+  fr: [
+    "Un langage de risque, jamais de certitude : « réduit le risque de », jamais « va causer ».",
+    "Aucun message fondé sur la peur, aucune image choquante.",
+    "Jamais « contrôle », « observance » ni « bonne ou mauvaise glycémie » : nous disons « gérer », « dans ou hors de la cible », et nous donnons les vrais chiffres.",
+    "Chaque taux historique est accompagné de sa tendance : la plupart des chiffres publiés sur les complications viennent de personnes diagnostiquées il y a des décennies.",
+    "Quand les organismes experts ne s'entendent pas, nous le disons et présentons les deux positions.",
+    "Quand une recommandation repose sur des données faibles, nous le disons aussi.",
+    "Les complications ne sont jamais un jugement sur les efforts.",
+  ],
+}[lang];
+const altUrl = staticUrl(other, key);
+---
+<Base lang={lang} title={titles[key][lang]} description={descs[key][lang]} altUrl={altUrl} noindex={key === "search"}>
+  <h1>{titles[key][lang]}</h1>
+  <p class="lede">{descs[key][lang]}</p>
+
+  {key === "downloads" && (
+    <div class="list-pages" style="max-width:none">
+      {BUNDLES.map((b) => (
+        <div class="card">
+          <h3>{b.label[lang]}</h3>
+          <p style="margin-bottom:12px">{b.topics.map((k) => TOPICS[k].label[lang]).join(" · ")}</p>
+          <Downloads lang={lang} slug={b.slug} />
+        </div>
+      ))}
+      <p class="disclaimer">{lang === "en"
+        ? "The handout and document contain the same text as the web pages. The slide deck is the original teaching presentation, with speaker notes."
+        : "Le PDF et le document Word reprennent le texte des pages web. La présentation est la version d'enseignement originale, avec les notes de l'animateur."}</p>
+    </div>
+  )}
+
+  {key === "sources" && (
+    <div class="prose">
+      <ul>
+        {sources.map(([s, cites]) => (
+          <li><strong>{s}</strong> — {cites.map((c, i) => <>{i > 0 && ", "}<a href={c.url}>{c.title}</a></>)}</li>
+        ))}
+      </ul>
+    </div>
+  )}
+
+  {key === "about" && (
+    <div class="prose">
+      {lang === "en" ? (
+        <>
+          <p><strong>KRKT's Type 1 Diabetes Education</strong> (KRKT:T1DE) is part of the KRKT Library. It is patient education about type 1 diabetes, written for people who were recently diagnosed and for the family, friends, coworkers and coaches around them.</p>
+          <p>It is written for a Canadian, and specifically Québec, reader: blood sugar in mmol/L, Diabetes Canada guidance, 911, and Québec helplines and coverage.</p>
+          <h2>What this is not</h2>
+          <p>This is education, not medical advice. Nothing here replaces your own diabetes team. Every dose, ratio and target belongs with them.</p>
+          <h2>How it is written</h2>
+          <ol>{rules.map((r) => <li>{r}</li>)}</ol>
+          <h2>Known gaps</h2>
+          <ul>
+            <li>Diabetes Canada updated its chronic kidney disease chapter in 2025. Our screening intervals follow the stable guideline structure; confirm the details with your team.</li>
+            <li>Time-in-range targets shown are the adult figures. Children, older adults and pregnancy have their own.</li>
+            <li>Periodontal (gum) disease is covered qualitatively only.</li>
+          </ul>
+          <p>See <a href={staticUrl(lang, "sources")}>all sources</a>.</p>
+        </>
+      ) : (
+        <>
+          <p><strong>L'éducation sur le diabète de type 1 de KRKT</strong> (KRKT:T1DE) fait partie de la Bibliothèque KRKT. Il s'agit d'éducation sur le diabète de type 1, rédigée pour les personnes nouvellement diagnostiquées ainsi que pour la famille, les amis, les collègues et les entraîneurs qui les entourent.</p>
+          <p>Elle s'adresse à un lectorat canadien, et plus précisément québécois : glycémie en mmol/L, lignes directrices de Diabète Canada, 911, lignes d'aide et couverture au Québec.</p>
+          <h2>Ce que ce n'est pas</h2>
+          <p>Il s'agit d'éducation, pas d'un avis médical. Rien ici ne remplace votre équipe de soins en diabète. Chaque dose, ratio et cible se décide avec elle.</p>
+          <h2>Comment c'est rédigé</h2>
+          <ol>{rules.map((r) => <li>{r}</li>)}</ol>
+          <h2>Limites connues</h2>
+          <ul>
+            <li>Diabète Canada a mis à jour son chapitre sur l'insuffisance rénale chronique en 2025. Nos intervalles de dépistage suivent la structure stable des lignes directrices; confirmez les détails avec votre équipe.</li>
+            <li>Les cibles de temps dans la cible présentées sont celles des adultes. Les enfants, les personnes âgées et la grossesse ont leurs propres cibles.</li>
+            <li>La maladie parodontale (des gencives) n'est abordée que de façon qualitative.</li>
+          </ul>
+          <p>Voir <a href={staticUrl(lang, "sources")}>toutes les sources</a>.</p>
+        </>
+      )}
+    </div>
+  )}
+
+  {key === "search" && (
+    <>
+      <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+      <div id="search"></div>
+      <script is:inline type="module" define:vars={{ lang, placeholder: t.searchPlaceholder }}>
+        const s = document.createElement("script");
+        s.src = "/pagefind/pagefind-ui.js";
+        s.onload = () => new PagefindUI({ element: "#search", showSubResults: true, showImages: false, translations: { placeholder }, });
+        document.head.appendChild(s);
+      </script>
+    </>
+  )}
+</Base>

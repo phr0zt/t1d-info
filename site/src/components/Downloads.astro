@@ -1,0 +1,21 @@
+---
+import { T, type Lang } from "../lib/i18n";
+
+interface Props { lang: Lang; slug: string; compact?: boolean }
+const { lang, slug, compact } = Astro.props;
+const t = T[lang];
+const file = (l: Lang, ext: string) => `/downloads/${l}/krkt-t1de-${slug}-${l}.${ext}`;
+const other: Lang = lang === "en" ? "fr" : "en";
+---
+<div class="dl-row">
+  <a class="dl" href={file(lang, "pdf")} download><small>PDF</small> {t.pdf}</a>
+  <a class="dl" href={file(lang, "docx")} download><small>DOCX</small> {t.docx}</a>
+  <a class="dl" href={file(lang, "pptx")} download><small>PPTX</small> {t.pptx}</a>
+  {!compact && (
+    <>
+      <a class="dl" href={file(other, "pdf")} download hreflang={other}><small>PDF · {other.toUpperCase()}</small></a>
+      <a class="dl" href={file(other, "docx")} download hreflang={other}><small>DOCX · {other.toUpperCase()}</small></a>
+      <a class="dl" href={file(other, "pptx")} download hreflang={other}><small>PPTX · {other.toUpperCase()}</small></a>
+    </>
+  )}
+</div>

@@ -1,0 +1,40 @@
+---
+import "../styles/global.css";
+---
+<!doctype html>
+<html lang="fr-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>KRKT:T1DE · Type 1 Diabetes Education · Éducation sur le diabète de type 1</title>
+    <meta name="description" content="KRKT's Type 1 Diabetes Education, from the KRKT Library. L'éducation sur le diabète de type 1 de KRKT, de la Bibliothèque KRKT." />
+    <link rel="alternate" hreflang="en-CA" href={new URL("/en/", Astro.site)} />
+    <link rel="alternate" hreflang="fr-CA" href={new URL("/fr/", Astro.site)} />
+    <link rel="alternate" hreflang="x-default" href={new URL("/", Astro.site)} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@500;600&display=swap" rel="stylesheet" />
+    <style>
+      body { background: #000; color: #fff; min-height: 100vh; display: grid; place-items: center; padding: 16px; }
+      .gate { max-width: 760px; text-align: center; }
+      .gate .lib { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; opacity: .7; }
+      .gate h1 { color: #fff; font-size: clamp(2.4rem, 8vw, 4.5rem); margin: .2em 0 .1em; }
+      .gate h1 b { color: #b62b1a; }
+      .gate p { color: #c9c9c9; }
+      .gate .choices { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+      .gate a { display: inline-block; min-width: 220px; padding: 16px 24px; border: 1px solid rgba(255,255,255,.6); border-radius: 70px; color: #fff; text-decoration: none; font-weight: 600; }
+      .gate a:hover { background: #fff; color: #000; }
+    </style>
+  </head>
+  <body>
+    <main class="gate">
+      <div class="lib">KRKT Library · Bibliothèque KRKT</div>
+      <h1>KRKT<b>:</b>T1DE</h1>
+      <p lang="en">KRKT's Type 1 Diabetes Education</p>
+      <p>L'éducation sur le diabète de type 1 de KRKT</p>
+      <div class="choices">
+        <a href="/fr/" hreflang="fr" lang="fr">Français</a>
+        <a href="/en/" hreflang="en" lang="en">English</a>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+---
+import Base from "../../layouts/Base.astro";
+import { T, TOPICS, TOPIC_ORDER, LANGS, type Lang } from "../../lib/i18n";
+import { topicUrl, staticUrl } from "../../lib/pages";
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang } }));
+}
+const lang = Astro.params.lang as Lang;
+const t = T[lang];
+const other: Lang = lang === "en" ? "fr" : "en";
+const intro = {
+  en: "Type 1 diabetes changes a lot at once. This library explains it in plain language, one subject at a time: what type 1 is, the two emergencies, food, movement, medications, drugs and alcohol, and the long-term picture. It is written for the person who was just diagnosed and for the family, friends, coworkers and coaches around them.",
+  fr: "Le diabète de type 1 change beaucoup de choses d'un coup. Cette bibliothèque l'explique en termes simples, un sujet à la fois : ce qu'est le type 1, les deux urgences, l'alimentation, l'activité physique, les médicaments, les drogues et l'alcool, et la vision à long terme. Elle s'adresse à la personne qui vient de recevoir le diagnostic, et à la famille, aux amis, aux collègues et aux entraîneurs qui l'entourent.",
+}[lang];
+---
+<Base lang={lang} title={t.siteName} description={t.tagline} altUrl={`/${other}/`}>
+  <section class="hero">
+    <p class="eyebrow">{t.library} · {t.alias}</p>
+    <h1>{t.siteName}</h1>
+    <p class="lede">{t.tagline}</p>
+    <div class="cta">
+      <a class="btn btn-primary" href={topicUrl(lang, "start")}>{TOPICS.start.label[lang]} →</a>
+      <a class="btn btn-ghost" href={topicUrl(lang, "emergencies")}>{TOPICS.emergencies.label[lang]}</a>
+    </div>
+  </section>
+
+  <p class="lede" style="margin-bottom:28px">{intro}</p>
+
+  <h2 style="margin-top:0">{t.topics}</h2>
+  <div class="cards">
+    {TOPIC_ORDER.map((k) => (
+      <a class={`card${k === "emergencies" ? " card-emergency" : ""}`} href={topicUrl(lang, k)}>
+        <h3>{TOPICS[k].label[lang]}</h3>
+        <p>{TOPICS[k].blurb[lang]}</p>
+      </a>
+    ))}
+  </div>
+
+  <h2>{t.downloads}</h2>
+  <p class="lede">{t.downloadNote} <a href={staticUrl(lang, "downloads")}>{t.downloads} →</a></p>
+  <p class="disclaimer">{t.disclaimer}</p>
+</Base>

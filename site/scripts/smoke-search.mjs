@@ -1,0 +1,12 @@
+import puppeteer from "puppeteer-core";
+const b = await puppeteer.launch({ executablePath: "/usr/bin/google-chrome-stable", args: ["--no-sandbox"] });
+const p = await b.newPage();
+await p.setViewport({ width: 1200, height: 1100 });
+await p.emulateMediaFeatures([{ name: "prefers-color-scheme", value: "light" }]);
+await p.goto("http://localhost:4798/fr/recherche/", { waitUntil: "networkidle0" });
+await p.waitForSelector(".pagefind-ui__search-input");
+await p.type(".pagefind-ui__search-input", "glucagon");
+await new Promise((r) => setTimeout(r, 2500));
+console.log("results:", await p.$$eval(".pagefind-ui__result", (r) => r.length));
+await p.screenshot({ path: "/home/phr0zt/.claude/jobs/f05ce27f/tmp/search.png" });
+await b.close();

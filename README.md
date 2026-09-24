@@ -118,6 +118,38 @@ Per-slide sources appear in the footer of the slide that uses them.
 
 ---
 
+## The website — KRKT:T1DE
+
+The decks are published as **KRKT's Type 1 Diabetes Education** (*L'éducation sur le
+diabète de type 1 de KRKT*), from the KRKT Library, alias **KRKT:T1DE**: a bilingual
+English / Québec French static site in `site/`, deployed on Railway.
+
+- `CONTENT_SPEC.md` — page format, callout syntax, FR-QC glossary and typography. Read it
+  before writing or editing a page.
+- `site/src/content/pages/{en,fr}/<topic>/*.md` — every page; EN and FR twins share a
+  `translationKey`.
+- `decks/<nn>/project/slides-fr/` — French versions of every slide, same markup as `slides/`.
+- `site/public/downloads/` — PDF handout, DOCX and PPTX for each deck in both languages.
+  These are built locally (they need Chrome and pandoc) and committed.
+
+```bash
+cd site
+npm install
+npm run dev                  # local preview
+npm run build                # Astro + Pagefind search index
+node scripts/check.mjs       # links, EN/FR pairs, editorial word list
+npm run downloads            # rebuild PDF/DOCX/PPTX (after a build), then build again
+python3 ../scripts/extract_slides.py   # re-extract slide text into build/slides/*.json
+```
+
+The downloads script also reports slide text that overflows 1920×1080 or runs into the
+footer; `scripts/tighten_slide.py <slide.html>` shrinks body text on one slide.
+
+Railway: project `krkt-t1de`, one service with root directory `/site`, configured by
+`site/railway.json` (`npm run build`, then `npm start` serves `dist/`).
+
+---
+
 ## Licence and use
 
 Patient education, not medical advice. Doses, ratios and targets belong with a

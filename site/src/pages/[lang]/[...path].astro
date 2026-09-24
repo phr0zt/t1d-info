@@ -1,0 +1,84 @@
+---
+import { render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import Downloads from "../../components/Downloads.astro";
+import { T, TOPICS, bundleFor, formatDate, type Lang } from "../../lib/i18n";
+import { allPages, langOf, isIndex, urlOf, topicPages, topicUrl, counterpart, readingOrder, type Page } from "../../lib/pages";
+
+export async function getStaticPaths() {
+  const pages = await allPages();
+  return pages.map((page) => {
+    const [lang, folder] = page.id.split("/");
+    const rest = page.id.split("/").slice(2).join("/");
+    return { params: { lang, path: isIndex(page) ? folder : `${folder}/${rest}` }, props: { page } };
+  });
+}
+
+const { page } = Astro.props as { page: Page };
+const lang = langOf(page) as Lang;
+const t = T[lang];
+const topic = page.data.topic;
+const { Content } = await render(page);
+const siblings = await topicPages(lang, topic);
+const twin = await counterpart(page);
+const order = await readingOrder(lang);
+const i = order.findIndex((p) => p.id === page.id);
+const prev = i > 0 ? order[i - 1] : undefined;
+const next = i >= 0 && i < order.length - 1 ? order[i + 1] : undefined;
+const bundle = bundleFor(topic);
+const here = urlOf(page);
+---
+<Base lang={lang} title={page.data.title} description={page.data.description} altUrl={twin ? urlOf(twin) : undefined} topic={topic}>
+  <div class="article-grid">
+    <article>
+      <p class="eyebrow">{isIndex(page) ? T[lang].topics : <a href={topicUrl(lang, topic)}>{TOPICS[topic].label[lang]}</a>}</p>
+      <h1>{page.data.title}</h1>
+      <p class="lede">{page.data.description}</p>
+      <div class="prose" data-pagefind-body>
+        <Content />
+      </div>
+
+      {isIndex(page) && siblings.length > 0 && (
+        <ul class="list-pages">
+          {siblings.map((p) => (
+            <li><a href={urlOf(p)}><strong>{p.data.title}</strong><span>{p.data.description}</span></a></li>
+          ))}
+        </ul>
+      )}
+
+      <div class="meta">
+        {page.data.sources.length > 0 && (
+          <>
+            <strong>{t.sources}</strong>
+            <ul>{page.data.sources.map((s) => <li>{s}</li>)}</ul>
+          </>
+        )}
+        <p>{t.reviewed}{lang === "fr" ? " :" : ":"} {formatDate(page.data.reviewed, lang)}</p>
+        <p class="disclaimer">{t.disclaimer}</p>
+      </div>
+
+      <nav class="pager" aria-label={`${t.prev} / ${t.next}`}>
+        {prev && <a class="prev" href={urlOf(prev)}><span>← {t.prev}</span>{prev.data.title}</a>}
+        {next && <a class="next" href={urlOf(next)}><span>{t.next} →</span>{next.data.title}</a>}
+      </nav>
+    </article>
+
+    <aside class="side">
+      {siblings.length > 0 && (
+        <div class="box">
+          <h2><a href={topicUrl(lang, topic)}>{TOPICS[topic].label[lang]}</a></h2>
+          <ol>
+            {siblings.map((p) => (
+              <li><a href={urlOf(p)} aria-current={urlOf(p) === here ? "page" : undefined}>{p.data.title}</a></li>
+            ))}
+          </ol>
+        </div>
+      )}
+      <div class="box no-print">
+        <h2>{t.downloadThis}</h2>
+        <p>{bundle.label[lang]}</p>
+        <Downloads lang={lang} slug={bundle.slug} compact />
+      </div>
+    </aside>
+  </div>
+</Base>

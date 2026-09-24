@@ -1,0 +1,91 @@
+---
+// Single-document view of a download bundle. Printed to PDF and converted to
+// DOCX by scripts/build-downloads.mjs; not linked from the site.
+import "../../../styles/global.css";
+import { render } from "astro:content";
+import { T, BUNDLES, LANGS, TOPICS, formatDate, type Lang } from "../../../lib/i18n";
+import { topicIndex, topicPages, type Page } from "../../../lib/pages";
+
+export function getStaticPaths() {
+  return LANGS.flatMap((lang) => BUNDLES.map((b) => ({ params: { lang, bundle: b.slug }, props: { bundle: b } })));
+}
+const lang = Astro.params.lang as Lang;
+const { bundle } = Astro.props as { bundle: (typeof BUNDLES)[number] };
+const t = T[lang];
+
+const sections: { topic: string; pages: { page: Page; Content: any }[] }[] = [];
+for (const k of bundle.topics) {
+  const list = [await topicIndex(lang, k), ...(await topicPages(lang, k))].filter(Boolean) as Page[];
+  sections.push({
+    topic: TOPICS[k].label[lang],
+    pages: await Promise.all(list.map(async (page) => ({ page, Content: (await render(page)).Content }))),
+  });
+}
+const today = formatDate(new Date(), lang);
+---
+<!doctype html>
+<html lang={lang === "fr" ? "fr-CA" : "en-CA"}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>{bundle.label[lang]} · {t.alias}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@500;600&display=swap" rel="stylesheet" />
+    <style>
+      @page { size: Letter; margin: 18mm 16mm 20mm; }
+      :root { color-scheme: light; }
+      body { background: #fff; color: #1f2630; font-size: 10.5pt; line-height: 1.5; }
+      .cover { height: 230mm; display: flex; flex-direction: column; justify-content: space-between; break-after: page; }
+      .cover .top { border-top: 4px solid #b62b1a; padding-top: 10mm; }
+      .cover .lib { font-size: 9pt; letter-spacing: .14em; text-transform: uppercase; color: #5c6672; }
+      .cover h1 { font-size: 34pt; margin: 8mm 0 4mm; }
+      .cover .alias { font-family: var(--display); font-size: 14pt; }
+      .cover .alias b { color: #b62b1a; }
+      .topic { break-before: page; }
+      .topic > h1 { font-size: 24pt; border-bottom: 2px solid #16202b; padding-bottom: 3mm; }
+      .page { margin-bottom: 10mm; }
+      .page h2.title { font-size: 17pt; margin: 8mm 0 2mm; }
+      .page .desc { color: #4b5560; font-style: italic; }
+      .prose { max-width: none; color: #1f2630; }
+      .prose h2 { font-size: 13pt; margin: 5mm 0 2mm; }
+      .prose h3 { font-size: 11.5pt; }
+      .src { font-size: 8.5pt; color: #5c6672; border-top: 1px solid #e2ddd2; padding-top: 2mm; }
+      .callout { break-inside: avoid; padding: 10px 14px; }
+      .callout-stats li strong:first-child { font-size: 18pt; }
+      .end { break-before: page; font-size: 10pt; color: #37414d; }
+    </style>
+  </head>
+  <body>
+    <section class="cover">
+      <div class="top">
+        <div class="lib">{t.library}</div>
+        <h1>{bundle.label[lang]}</h1>
+        <p class="alias">KRKT<b>:</b>T1DE · {t.siteName}</p>
+        {bundle.topics.length > 1 && <p>{bundle.topics.map((k) => TOPICS[k].label[lang]).join(" · ")}</p>}
+      </div>
+      <div>
+        <p><strong>{t.emergencyTitle}.</strong> {t.emergencyText}</p>
+        <p>{t.disclaimer}</p>
+        <p class="src">{t.footerNote} · {today}</p>
+      </div>
+    </section>
+
+    {sections.map((s) => (
+      <section class="topic">
+        <h1>{s.topic}</h1>
+        {s.pages.map(({ page, Content }) => (
+          <article class="page">
+            {!page.id.endsWith("/index") && <h2 class="title">{page.data.title}</h2>}
+            <p class="desc">{page.data.description}</p>
+            <div class="prose"><Content /></div>
+            {page.data.sources.length > 0 && <p class="src">{t.sources}{lang === "fr" ? " :" : ":"} {page.data.sources.join(" · ")}</p>}
+          </article>
+        ))}
+      </section>
+    ))}
+
+    <section class="end">
+      <p><strong>{t.siteName}</strong> ({t.alias}), {t.fromLibrary}.</p>
+      <p>{t.disclaimer}</p>
+    </section>
+  </body>
+</html>
