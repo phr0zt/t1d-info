@@ -1,0 +1,23 @@
+{
+  "v": 4,
+  "createdOnFiles": { "v": 1, "at": "2026-09-24T19:00:00Z" },
+  "title": "Movement and Type 1 Diabetes",
+  "order": [
+    "cover", "why", "twoways", "benefits", "a1c", "tradeoff", "targets",
+    "before", "stop", "insulin", "fuel", "during",
+    "after", "overcorrect", "competition", "order",
+    "gear", "conditions", "cautions",
+    "coaches", "dont", "help"
+  ],
+  "sections": {
+    "s1": { "description": "Why the same activity can send blood sugar in two directions, and what it is worth", "start": "cover" },
+    "s2": { "description": "Before and during: starting glucose, insulin, fuel and when not to go", "start": "before" },
+    "s3": { "description": "Afterwards — the long tail of risk, and the moments people get wrong", "start": "after" },
+    "s4": { "description": "Kit, conditions, existing complications, and what coaches and family need to know", "start": "gear" }
+  },
+  "faces": {
+    "outfit": { "family": "Outfit", "href": "https://fonts.googleapis.com/css2?family=Outfit:wght@300..700&display=swap" },
+    "inter": { "family": "Inter", "href": "https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap" }
+  },
+  "designSystems": []
+}

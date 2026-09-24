@@ -1,0 +1,23 @@
+{
+  "v": 4,
+  "createdOnFiles": { "v": 1, "at": "2026-09-24T18:00:00Z" },
+  "title": "Medications and Type 1 Diabetes",
+  "order": [
+    "cover", "why", "rule", "threeways",
+    "up", "steroids", "down", "betablockers", "sglt2",
+    "sickdays", "sickkit", "otc", "cgm",
+    "glucagon", "hypo",
+    "pharmacist", "asking", "caretakers", "myths", "help"
+  ],
+  "sections": {
+    "s1": { "description": "Why medications need a second thought when you have type 1", "start": "cover" },
+    "s2": { "description": "Medicines that move your blood sugar, and which way they move it", "start": "up" },
+    "s3": { "description": "Sick days, over-the-counter traps, and the things that fool your sensor", "start": "sickdays" },
+    "s4": { "description": "Emergencies, questions to ask, and what caretakers need to know", "start": "glucagon" }
+  },
+  "faces": {
+    "outfit": { "family": "Outfit", "href": "https://fonts.googleapis.com/css2?family=Outfit:wght@300..700&display=swap" },
+    "inter": { "family": "Inter", "href": "https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap" }
+  },
+  "designSystems": []
+}

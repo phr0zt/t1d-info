@@ -1,0 +1,22 @@
+{
+  "v": 4,
+  "createdOnFiles": { "v": 1, "at": "2026-09-24T18:30:00Z" },
+  "title": "Food and Type 1 Diabetes",
+  "order": [
+    "cover", "nodiet", "groups", "carbs", "free",
+    "timing", "delayed", "dosing", "gi", "fibre", "labels",
+    "hypo", "alcohol", "sick", "celiac", "glutenfree",
+    "myths", "hosting", "parties", "police", "help"
+  ],
+  "sections": {
+    "s1": { "description": "There is no diabetic diet — what each food group actually does to blood sugar", "start": "cover" },
+    "s2": { "description": "Timing, the delayed rise after fatty meals, and reading a Canadian label", "start": "timing" },
+    "s3": { "description": "Lows, alcohol, sick days, and the conditions that travel with type 1", "start": "hypo" },
+    "s4": { "description": "For family, friends and caretakers: hosting, parties, and what not to say", "start": "myths" }
+  },
+  "faces": {
+    "outfit": { "family": "Outfit", "href": "https://fonts.googleapis.com/css2?family=Outfit:wght@300..700&display=swap" },
+    "inter": { "family": "Inter", "href": "https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap" }
+  },
+  "designSystems": []
+}

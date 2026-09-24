@@ -1,0 +1,27 @@
+{
+  "v": 4,
+  "createdOnFiles": { "v": 1, "at": "2026-09-24T20:00:00Z" },
+  "title": "Type 1 Diabetes — The Master Deck",
+  "order": [
+    "cover", "howto", "what", "job",
+    "two", "hypo", "glucagon", "dka", "sick",
+    "inputs", "food", "timing", "move", "moveafter",
+    "meds", "alcohol", "drugs", "other",
+    "dcct", "targets", "screening", "levers",
+    "notfailure", "people", "language", "distress",
+    "library", "help"
+  ],
+  "sections": {
+    "s1": { "description": "What type 1 is, and what the job actually is", "start": "cover" },
+    "s2": { "description": "The two emergencies — learn these before anything else", "start": "two" },
+    "s3": { "description": "The three daily inputs: food, insulin timing and movement", "start": "inputs" },
+    "s4": { "description": "Everything else that moves your blood sugar", "start": "meds" },
+    "s5": { "description": "The long game: the evidence, the targets and the screening", "start": "dcct" },
+    "s6": { "description": "The people around you, and where to go next", "start": "notfailure" }
+  },
+  "faces": {
+    "outfit": { "family": "Outfit", "href": "https://fonts.googleapis.com/css2?family=Outfit:wght@300..700&display=swap" },
+    "inter": { "family": "Inter", "href": "https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap" }
+  },
+  "designSystems": []
+}

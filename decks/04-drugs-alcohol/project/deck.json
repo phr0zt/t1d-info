@@ -1,0 +1,65 @@
+{
+  "v": 4,
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-09-24T12:00:00Z"
+  },
+  "title": "Drugs and Type 1 Diabetes",
+  "order": [
+    "cover",
+    "why",
+    "how",
+    "three",
+    "danger",
+    "dka",
+    "hypo",
+    "smoking",
+    "nicotine",
+    "vapes",
+    "weed",
+    "weed2",
+    "thc",
+    "alcohol",
+    "stims",
+    "mdma",
+    "psych",
+    "mixing",
+    "checklist",
+    "mates",
+    "help",
+    "travel"
+  ],
+  "sections": {
+    "s1": {
+      "description": "Why drugs land differently on a body with type 1",
+      "start": "cover"
+    },
+    "s2": {
+      "description": "The two emergencies: a hypo and DKA, and how to handle each",
+      "start": "danger"
+    },
+    "s3": {
+      "description": "The everyday three — nicotine, cannabis and alcohol",
+      "start": "smoking"
+    },
+    "s4": {
+      "description": "Less common, still serious — stimulants, MDMA, psychedelics",
+      "start": "stims"
+    },
+    "s5": {
+      "description": "Staying safer, what friends need to know, help in Canada and North America, and what to look up before travelling",
+      "start": "mixing"
+    }
+  },
+  "faces": {
+    "outfit": {
+      "family": "Outfit",
+      "href": "https://fonts.googleapis.com/css2?family=Outfit:wght@300..700&display=swap"
+    },
+    "inter": {
+      "family": "Inter",
+      "href": "https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap"
+    }
+  },
+  "designSystems": []
+}

@@ -1,0 +1,24 @@
+{
+  "v": 4,
+  "createdOnFiles": { "v": 1, "at": "2026-09-24T19:30:00Z" },
+  "title": "Complications and Type 1 Diabetes",
+  "order": [
+    "cover", "read",
+    "dcct", "numbers", "edic", "memory", "caveat", "falling",
+    "eyes", "kidneys", "nerves", "heart", "feet", "dka", "unaware",
+    "screening", "targets", "levers",
+    "notfailure", "access", "distress", "eating",
+    "families", "help"
+  ],
+  "sections": {
+    "s1": { "description": "How to read this deck, and the trial that answered the question", "start": "cover" },
+    "s2": { "description": "What can happen, plainly — and how much of it has already stopped happening", "start": "eyes" },
+    "s3": { "description": "What to actually do: screening, targets, and the five levers", "start": "screening" },
+    "s4": { "description": "Why outcomes are not a verdict on effort, and what families should know", "start": "notfailure" }
+  },
+  "faces": {
+    "outfit": { "family": "Outfit", "href": "https://fonts.googleapis.com/css2?family=Outfit:wght@300..700&display=swap" },
+    "inter": { "family": "Inter", "href": "https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap" }
+  },
+  "designSystems": []
+}
