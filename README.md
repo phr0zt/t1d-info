@@ -145,8 +145,9 @@ python3 ../scripts/extract_slides.py   # re-extract slide text into build/slides
 The downloads script also reports slide text that overflows 1920×1080 or runs into the
 footer; `scripts/tighten_slide.py <slide.html>` shrinks body text on one slide.
 
-Railway: project `krkt-t1de`, one service with root directory `/site`, configured by
-`site/railway.json` (`npm run build`, then `npm start` serves `dist/`).
+Railway: project `krkt-t1de`, service `t1de-site`, root directory `/site`, build
+`npm run build`, start `npm start` (serves `dist/` on `$PORT`), redeploys on changes under
+`site/`. Settings live on the service, not in a config file.
 
 ---
 
