@@ -12,7 +12,7 @@ import re
 from bs4 import BeautifulSoup, NavigableString
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-DECKS = ["00-master", "01-food", "02-movement", "03-medications", "04-drugs-alcohol", "05-complications"]
+DECKS = ["00-master", "01-food", "02-movement", "03-medications", "04-drugs-alcohol", "05-complications", "07-manual-therapy"]
 TONES = {"#c0392b": "warning", "#1f7a6b": "do", "#16202b": "dark", "#243141": "dark"}
 
 

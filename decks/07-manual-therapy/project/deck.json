@@ -1,0 +1,54 @@
+{
+  "v": 4,
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-10-03T12:00:00Z"
+  },
+  "title": "Massage, Orthotherapy and Type 1 Diabetes",
+  "order": [
+    "cover",
+    "who",
+    "why",
+    "honest",
+    "insulin",
+    "lows",
+    "sensors",
+    "notoday",
+    "nerves",
+    "joints",
+    "skin",
+    "tell",
+    "therapists",
+    "choosing",
+    "help"
+  ],
+  "sections": {
+    "s1": {
+      "description": "Who does what in Québec, why people with type 1 book, and what massage can honestly claim",
+      "start": "cover"
+    },
+    "s2": {
+      "description": "Glucose on the table: insulin sites, lows, sensors and pumps, and when to reschedule",
+      "start": "insulin"
+    },
+    "s3": {
+      "description": "Bodies with complications: numb feet, stiff shoulders and hands, skin and getting up",
+      "start": "nerves"
+    },
+    "s4": {
+      "description": "What to tell the therapist, what therapists need, choosing one in Québec, and help",
+      "start": "tell"
+    }
+  },
+  "faces": {
+    "outfit": {
+      "family": "Outfit",
+      "href": "https://fonts.googleapis.com/css2?family=Outfit:wght@300..700&display=swap"
+    },
+    "inter": {
+      "family": "Inter",
+      "href": "https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap"
+    }
+  },
+  "designSystems": []
+}

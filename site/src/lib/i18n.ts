@@ -3,7 +3,7 @@ export const LANGS: Lang[] = ["en", "fr"];
 
 export type TopicKey =
   | "start" | "emergencies" | "food" | "movement" | "medications"
-  | "drugs-alcohol" | "complications" | "people" | "help";
+  | "drugs-alcohol" | "complications" | "manual-therapy" | "people" | "help";
 
 // Topic folder names per language, and which source deck feeds each download bundle.
 export const TOPICS: Record<TopicKey, { en: string; fr: string; label: Record<Lang, string>; blurb: Record<Lang, string>; deck: string }> = {
@@ -42,6 +42,11 @@ export const TOPICS: Record<TopicKey, { en: string; fr: string; label: Record<La
     label: { en: "Complications", fr: "Complications" },
     blurb: { en: "What the evidence says, how far the rates have fallen, and screening.", fr: "Ce que disent les données, à quel point les taux ont diminué, et le dépistage." },
   },
+  "manual-therapy": {
+    en: "manual-therapy", fr: "therapies-manuelles", deck: "07-manual-therapy",
+    label: { en: "Massage & manual therapy", fr: "Massothérapie et orthothérapie" },
+    blurb: { en: "Massage, orthotherapy and physio with type 1: what helps, insulin sites, sensors, and what to tell the therapist.", fr: "Massothérapie, orthothérapie et physio avec le type 1 : ce qui aide, les sites d'insuline, les capteurs et quoi dire au thérapeute." },
+  },
   people: {
     en: "people", fr: "entourage", deck: "00-master",
     label: { en: "The people around you", fr: "Votre entourage" },
@@ -54,7 +59,7 @@ export const TOPICS: Record<TopicKey, { en: string; fr: string; label: Record<La
   },
 };
 
-export const TOPIC_ORDER: TopicKey[] = ["start", "emergencies", "food", "movement", "medications", "drugs-alcohol", "complications", "people", "help"];
+export const TOPIC_ORDER: TopicKey[] = ["start", "emergencies", "food", "movement", "medications", "drugs-alcohol", "complications", "manual-therapy", "people", "help"];
 
 export function topicFromFolder(lang: Lang, folder: string): TopicKey | undefined {
   return TOPIC_ORDER.find((k) => TOPICS[k][lang] === folder);
@@ -68,6 +73,7 @@ export const BUNDLES: { deck: string; slug: string; label: Record<Lang, string>;
   { deck: "03-medications", slug: "03-medications", label: { en: "Medications", fr: "Médicaments" }, topics: ["medications"] },
   { deck: "04-drugs-alcohol", slug: "04-drugs-alcohol", label: { en: "Drugs & alcohol", fr: "Drogues et alcool" }, topics: ["drugs-alcohol"] },
   { deck: "05-complications", slug: "05-complications", label: { en: "Complications", fr: "Complications" }, topics: ["complications"] },
+  { deck: "07-manual-therapy", slug: "07-manual-therapy", label: { en: "Massage & manual therapy", fr: "Massothérapie et orthothérapie" }, topics: ["manual-therapy"] },
 ];
 
 export function bundleFor(topic: TopicKey) {

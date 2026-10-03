@@ -25,6 +25,7 @@ const BUNDLES = [
   ["03-medications", "03-medications", { en: "Medications", fr: "Médicaments" }],
   ["04-drugs-alcohol", "04-drugs-alcohol", { en: "Drugs & alcohol", fr: "Drogues et alcool" }],
   ["05-complications", "05-complications", { en: "Complications", fr: "Complications" }],
+  ["07-manual-therapy", "07-manual-therapy", { en: "Massage & manual therapy", fr: "Massothérapie et orthothérapie" }],
 ];
 const only = process.argv.slice(2); // optional: formats to build, e.g. `pdf docx`
 const want = (f) => only.length === 0 || only.includes(f);

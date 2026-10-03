@@ -11,7 +11,7 @@ const pages = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    topic: z.enum(["start", "emergencies", "food", "movement", "medications", "drugs-alcohol", "complications", "people", "help"]),
+    topic: z.enum(["start", "emergencies", "food", "movement", "medications", "drugs-alcohol", "complications", "manual-therapy", "people", "help"]),
     order: z.number(),
     translationKey: z.string(),
     sources: z.array(z.string()).default([]),

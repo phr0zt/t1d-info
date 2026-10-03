@@ -18,6 +18,7 @@ Québec-specific helplines and coverage rules.
 | 03 | **Medications** | 20 | Steroids, beta blockers, SGLT2 inhibitors and euglycemic DKA, sick-day hold lists, CGM interference, glucagon, and the questions to ask before starting anything. |
 | 04 | **Drugs and alcohol** | 22 | Harm reduction, not a lecture. Nicotine, cannabis, alcohol, stimulants, MDMA, psychedelics, mixing, travel numbers. |
 | 05 | **Complications** | 24 | DCCT/EDIC evidence, each complication plainly, how far the rates have fallen, the Canadian screening schedule, and why outcomes are not a verdict on effort. |
+| 07 | **Massage and manual therapy** | 15 | Massage therapy, orthotherapy and physio with type 1: who is regulated in Québec, what massage can honestly claim, insulin absorption under massage and heat, lows on the table, CGM compression lows and oils, neuropathy, frozen shoulder and stiff hands, lipohypertrophy, what to tell the therapist, a page for therapists, insurance and taxes. Research and fact-check: `research/07-manual-therapy.md`. |
 | 06 | **Portable archive** | 143 | All six decks concatenated in order, separated by blank divider slides, for archiving and later builds. |
 
 Total: **137 unique slides**, plus 6 blank dividers in the archive.
@@ -113,6 +114,10 @@ Per-slide sources appear in the footer of the slide that uses them.
   at build time.
 - Time-in-range targets are the adult figures. Children, older adults and pregnancy
   have their own; verify against the primary paper before adding them.
+- Deck 07 (manual therapy) is not yet in the 06 portable archive. Its massage-absorption
+  figures come from small studies on older insulins (n ≤ 9); the effect on rapid-acting
+  analogues and pump sites is inferred from heat studies. Revenu Québec's line 381 rules on
+  massage were checked only through secondary sources.
 - Periodontal disease is treated qualitatively — the primary sources were not
   reachable at build time.
 
@@ -129,7 +134,10 @@ English / Québec French static site in `site/`, deployed on Railway.
 - `site/src/content/pages/{en,fr}/<topic>/*.md` — every page; EN and FR twins share a
   `translationKey`.
 - `decks/<nn>/project/slides-fr/` — French versions of every slide, same markup as `slides/`.
-- `site/public/downloads/` — PDF handout, DOCX and PPTX for each deck in both languages.
+- `site/public/downloads/` — PDF handout, DOCX and PPTX for each deck in both languages, plus
+  the printable therapist card (`krkt-t1de-07-therapist-card-{en,fr}.pdf`).
+- `cards/` — KRKT Library card set for deck 07 (`cards/lbry/`, 6 cards × EN/FR, PNG + PDF), the
+  therapist card source (`cards/therapist-card-*.html`) and the generators in `cards/src/`.
   These are built locally (they need Chrome and pandoc) and committed.
 
 ```bash
