@@ -45,6 +45,8 @@ Below 3.9 mmol/L, Diabetes Canada says take **15 g of fast-acting carbohydrate**
 - 15 mL (1 tbsp) honey
 :::
 
+Want the full list in Canadian brands — Rockets, maple syrup, jelly beans — and how to work out any candy from its label? See [fast-acting carbs](/en/fast-carbs/the-chart/).
+
 In practice, many people need more than 15 g — a Canadian study found an average of 32 g. Start at 15, recheck, and set your own amount with your diabetes team.
 
 ## What does not work

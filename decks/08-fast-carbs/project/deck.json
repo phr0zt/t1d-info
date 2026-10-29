@@ -1,0 +1,51 @@
+{
+  "v": 4,
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-10-04T12:00:00Z"
+  },
+  "title": "Fast-Acting Carbs: What Treats a Low",
+  "order": [
+    "cover",
+    "rule",
+    "speed",
+    "pantry",
+    "candy",
+    "canada",
+    "label",
+    "notfirst",
+    "amounts",
+    "medicine",
+    "kits",
+    "help"
+  ],
+  "sections": {
+    "s1": {
+      "description": "The 15-15 rule and why some sugars work faster than others",
+      "start": "cover"
+    },
+    "s2": {
+      "description": "The chart: pantry and candy amounts for Canada, and making your own row from a label",
+      "start": "pantry"
+    },
+    "s3": {
+      "description": "What isn't a first choice, and who needs a different amount",
+      "start": "notfirst"
+    },
+    "s4": {
+      "description": "Treating it like medicine, where to keep it, and help",
+      "start": "medicine"
+    }
+  },
+  "faces": {
+    "outfit": {
+      "family": "Outfit",
+      "href": "https://fonts.googleapis.com/css2?family=Outfit:wght@300..700&display=swap"
+    },
+    "inter": {
+      "family": "Inter",
+      "href": "https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap"
+    }
+  },
+  "designSystems": []
+}

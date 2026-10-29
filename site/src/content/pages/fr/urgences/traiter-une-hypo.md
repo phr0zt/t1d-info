@@ -45,6 +45,8 @@ Sous 3,9 mmol/L, Diabète Canada recommande de prendre **15 g de glucides à a
 - 15 mL (1 c. à soupe) de miel
 :::
 
+Pour la liste complète en marques canadiennes (Rockets, sirop d'érable, fèves à la gelée) et pour calculer la quantité de n'importe quel bonbon à partir de son étiquette, voyez [les sucres rapides](/fr/sucres-rapides/le-tableau/).
+
 En pratique, bien des gens ont besoin de plus de 15 g : une étude canadienne a relevé une moyenne de 32 g. Commencez par 15 g, vérifiez de nouveau, et déterminez votre propre quantité avec votre équipe de soins en diabète.
 
 ## Ce qui ne fonctionne pas

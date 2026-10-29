@@ -3,7 +3,7 @@ export const LANGS: Lang[] = ["en", "fr"];
 
 export type TopicKey =
   | "start" | "emergencies" | "food" | "movement" | "medications"
-  | "drugs-alcohol" | "complications" | "manual-therapy" | "people" | "help";
+  | "drugs-alcohol" | "complications" | "manual-therapy" | "fast-carbs" | "people" | "help";
 
 // Topic folder names per language, and which source deck feeds each download bundle.
 export const TOPICS: Record<TopicKey, { en: string; fr: string; label: Record<Lang, string>; blurb: Record<Lang, string>; deck: string }> = {
@@ -47,6 +47,11 @@ export const TOPICS: Record<TopicKey, { en: string; fr: string; label: Record<La
     label: { en: "Massage & manual therapy", fr: "Massothérapie et orthothérapie" },
     blurb: { en: "Massage, orthotherapy and physio with type 1: what helps, insulin sites, sensors, and what to tell the therapist.", fr: "Massothérapie, orthothérapie et physio avec le type 1 : ce qui aide, les sites d'insuline, les capteurs et quoi dire au thérapeute." },
   },
+  "fast-carbs": {
+    en: "fast-carbs", fr: "sucres-rapides", deck: "08-fast-carbs",
+    label: { en: "Fast-acting carbs", fr: "Sucres rapides" },
+    blurb: { en: "What treats a low, how much is 15 g in Canadian brands, and what to leave on the shelf.", fr: "Ce qui traite une hypo, à quoi ressemblent 15 g en marques canadiennes, et quoi laisser sur la tablette." },
+  },
   people: {
     en: "people", fr: "entourage", deck: "00-master",
     label: { en: "The people around you", fr: "Votre entourage" },
@@ -59,7 +64,7 @@ export const TOPICS: Record<TopicKey, { en: string; fr: string; label: Record<La
   },
 };
 
-export const TOPIC_ORDER: TopicKey[] = ["start", "emergencies", "food", "movement", "medications", "drugs-alcohol", "complications", "manual-therapy", "people", "help"];
+export const TOPIC_ORDER: TopicKey[] = ["start", "emergencies", "fast-carbs", "food", "movement", "medications", "drugs-alcohol", "complications", "manual-therapy", "people", "help"];
 
 export function topicFromFolder(lang: Lang, folder: string): TopicKey | undefined {
   return TOPIC_ORDER.find((k) => TOPICS[k][lang] === folder);
@@ -74,6 +79,7 @@ export const BUNDLES: { deck: string; slug: string; label: Record<Lang, string>;
   { deck: "04-drugs-alcohol", slug: "04-drugs-alcohol", label: { en: "Drugs & alcohol", fr: "Drogues et alcool" }, topics: ["drugs-alcohol"] },
   { deck: "05-complications", slug: "05-complications", label: { en: "Complications", fr: "Complications" }, topics: ["complications"] },
   { deck: "07-manual-therapy", slug: "07-manual-therapy", label: { en: "Massage & manual therapy", fr: "Massothérapie et orthothérapie" }, topics: ["manual-therapy"] },
+  { deck: "08-fast-carbs", slug: "08-fast-carbs", label: { en: "Fast-acting carbs", fr: "Sucres rapides" }, topics: ["fast-carbs"] },
 ];
 
 export function bundleFor(topic: TopicKey) {
